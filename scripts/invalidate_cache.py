@@ -15,13 +15,13 @@ cloudfront_distribution_id = secrets["AWS_CLOUDFRONT_ID"]
 
 # Rutas de los archivos que quieres invalidar en CloudFront
 files_to_invalidate = [
-    "/etl/data/chunk_1.json",
-    "/etl/data/chunk_2.json",
-    "/etl/data/chunk_3.json",
-    "/etl/data/chunk_4.json",
-    "/etl/data/chunk_5.json",
-    "/etl/data/chunk_6.json",
-    "/etl/models/isolation_forest_model.pkl"
+    "/etl/chunk_1.json",
+    "/etl/chunk_2.json",
+    "/etl/chunk_3.json",
+    "/etl/chunk_4.json",
+    "/etl/chunk_5.json",
+    "/etl/chunk_6.json",
+    "/etl/isolation_forest_model.pkl"
 ]
 
 
