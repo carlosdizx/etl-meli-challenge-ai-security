@@ -1,17 +1,14 @@
 import boto3
 import os
-from utils.env import get_secrets  # Importar la configuración de secrets.toml
+from utils.env import get_secrets
 from pathlib import Path
 
 path_base = Path(__file__).resolve().parents[1]
 
-# Obtener la configuración de secrets
 secrets = get_secrets()
 
-# Configurar AWS S3 usando las credenciales y el bucket
 s3_client = boto3.client("s3")
 
-# Archivos específicos que se deben subir (usando rutas absolutas)
 files_to_upload = [
     path_base / "models/isolation_forest_model.pkl",
     path_base / "data/chunk_1.json",
@@ -32,4 +29,19 @@ for file in files_to_upload:
     if count > 0:
         raise Exception(f"No se encontraron {count} archivos para subir.")
 
-# Función para subir archivos específicos a S3
+
+def upload_files_to_s3(files):
+    for file_path in files:
+        file_name = os.path.basename(file_path)
+        s3_file_path = os.path.join(file_name)
+
+        try:
+            print(f"Subiendo {file_name} a S3...")
+            s3_client.upload_file(str(file_path), secrets["AWS_S3_BUCKET"], s3_file_path)
+            print(f"✅ Archivo {file_name} subido exitosamente.")
+        except Exception as e:
+            print(f"❌ Error al subir {file_name} a S3: {e}")
+
+
+if __name__ == "__main__":
+    upload_files_to_s3(files_to_upload)
