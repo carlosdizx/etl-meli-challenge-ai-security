@@ -1,19 +1,15 @@
 # 1. Importar librerias
 import pandas as pd
 from kagglehub import dataset_download
-import tomli
-from pathlib import Path
 from scripts.export_to_csv import export_csv
 from scripts.export_to_json import export_json
 from sklearn.model_selection import train_test_split
 
-# 2. Leer secrets.toml
-secrets_path = Path(__file__).resolve().parents[1] / 'secrets.toml'
+from utils.env import get_secrets
 
-with open(secrets_path, 'rb') as f:
-    secrets = tomli.load(f)
+get_secrets()
 
-chunk_size = int(secrets["DATASET_CHUNK_SIZE"])
+chunk_size = int(get_secrets()["DATASET_CHUNK_SIZE"])
 
 
 def load_dataset():
