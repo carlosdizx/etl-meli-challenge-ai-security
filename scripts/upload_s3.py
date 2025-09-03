@@ -19,19 +19,18 @@ files_to_upload = [
     path_base / "data/chunk_6.json"
 ]
 
+count = 0
 for file in files_to_upload:
-    count = 0
     if os.path.exists(file):
         print(f"🆗 El archivo {file} existe.")
     else:
         print(f"⛔ El archivo {file} NO existe o no es un archivo válido.")
         count += 1
-    if count > 0:
-        raise Exception(f"No se encontraron {count} archivos para subir.")
+if count > 0:
+    raise Exception(f"No se encontraron {count} archivos para subir.")
 
 
 def get_content_type_and_disposition(file_path):
-    print(f"Procesando {file_path}")
     if file_path.endswith(".json"):
         return "application/json", "inline"
     elif file_path.endswith(".csv"):
@@ -45,7 +44,8 @@ def get_content_type_and_disposition(file_path):
 def upload_files_to_s3(files):
     for file_path in files:
         file_name = os.path.basename(file_path)
-        s3_file_path = os.path.join("etl", file_name)
+
+        s3_file_path = os.path.join("etl", file_name).replace(os.sep, "/")
 
         content_type, content_disposition = get_content_type_and_disposition(str(file_path))
 
