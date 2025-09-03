@@ -71,7 +71,7 @@ Crea el archivo de configuración con el siguiente comando:
 python -m scripts.setup_secrets
 ```
 
-Este script te guiará en la configuración de las credenciales necesarias, incluyendo las claves de API para los servicios de IA y las credenciales de AWS para S3.
+Este script te guiará en la configuración de los secretos necesarios, como los recursos de AWS para S3 y CloudFront.
 
 ### 7) 🚦 Ejecución del ETL
 
