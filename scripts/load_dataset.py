@@ -8,7 +8,7 @@ from scripts.export_to_json import export_json
 from sklearn.model_selection import train_test_split
 
 # 2. Leer secrets.toml
-secrets_path = Path(__file__).resolve().parents[1] / '.streamlit' / 'secrets.toml'
+secrets_path = Path(__file__).resolve().parents[1] / 'secrets.toml'
 
 with open(secrets_path, 'rb') as f:
     secrets = tomli.load(f)
